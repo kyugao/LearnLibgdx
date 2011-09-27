@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
 	<classpathentry kind="lib" path="/SDemoMain/libs/gdx.jar" sourcepath="/SDemoMain/libs/gdx-sources.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SDemoMain"/>
+	<classpathentry kind="lib" path="/SDemoMain/libs/model-loaders.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

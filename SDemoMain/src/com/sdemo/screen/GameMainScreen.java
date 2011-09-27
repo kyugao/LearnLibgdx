@@ -4,12 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
-import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g3d.loaders.ModelLoaderOld;
 import com.badlogic.gdx.graphics.g3d.loaders.wavefront.ObjLoader;
 import com.badlogic.gdx.graphics.g3d.model.still.StillModel;
 
@@ -22,9 +18,6 @@ public class GameMainScreen implements Screen {
 
 	private StillModel model;
 
-	private Mesh mesh;
-	private Texture invaderTexture;
-
 	public GameMainScreen() {
 		super();
 		camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(),
@@ -33,15 +26,7 @@ public class GameMainScreen implements Screen {
 		FileHandle file = Gdx.files.internal("objs/obj.obj");
 		ObjLoader loader = new ObjLoader();
 		model = loader.loadObj(file, true);
-
-		mesh = ModelLoaderOld.loadObj(Gdx.files.internal("objs/invader.obj")
-				.read());
-		invaderTexture = new Texture(Gdx.files.internal("images/invader.png"),
-				Format.RGB565, true);
-		invaderTexture.setFilter(TextureFilter.MipMap, TextureFilter.Linear);
 	}
-
-	static int y;
 
 	@Override
 	public void render(float delta) {
@@ -61,18 +46,12 @@ public class GameMainScreen implements Screen {
 										// position.
 		camera.direction.set(0, 0, -1); // the sight direction
 		camera.update();
-		camera.apply(Gdx.gl10);
+		camera.apply(gl);
 
-//		gl.glPushMatrix();
-//		gl.glTranslatef(0, -10, -10);// location of the model which be rendered
-//										// next
-//		model.render();
-//		gl.glPopMatrix();
-
-		invaderTexture.bind();
 		gl.glPushMatrix();
-		gl.glTranslatef(0, -10, -10);
-		mesh.render(GL10.GL_TRIANGLES);
+		gl.glTranslatef(0, -10, -10);// location of the model which be rendered
+										// next
+		model.render();
 		gl.glPopMatrix();
 	}
 
